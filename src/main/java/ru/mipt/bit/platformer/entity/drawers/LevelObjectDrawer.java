@@ -3,7 +3,10 @@ package ru.mipt.bit.platformer.entity.drawers;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<<<<<<< HEAD
 import ru.mipt.bit.platformer.entity.GraphicObject;
+=======
+>>>>>>> 4fe93b7764387c3a3f40158528b2cb4ed6ee3efe
 
 import static ru.mipt.bit.platformer.util.GdxGameUtils.createBoundingRectangle;
 
