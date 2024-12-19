@@ -47,3 +47,14 @@ public class TankDrawer implements GameObjectGraphic  {
         texture.dispose();
     }
 }
+
+    @Override
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    @Override
+    public void dispose() {
+        texture.dispose();
+    }
+}
