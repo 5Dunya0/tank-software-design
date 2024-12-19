@@ -1,26 +1,31 @@
-package ru.mipt.bit.platformer.playerinput.inputs.keyboard;
+package ru.mipt.bit.platformer.playerinput.inputs.keyboard_player;
 
 import com.badlogic.gdx.Gdx;
-import ru.mipt.bit.platformer.playerinput.actions.EmptyAction;
+import ru.mipt.bit.platformer.entity.objects.Level;
+import ru.mipt.bit.platformer.entity.objects.base.AbstractMovableLevelObject;
 import ru.mipt.bit.platformer.playerinput.actions.base.AbstractAction;
-import ru.mipt.bit.platformer.playerinput.inputs.PlayerInput;
-import ru.mipt.bit.platformer.playerinput.inputs.PlayerInputActions;
+import ru.mipt.bit.platformer.playerinput.actions.base.AbstractActionFactory;
+import ru.mipt.bit.platformer.playerinput.actions.factories.EmptyActionFactory;
+import ru.mipt.bit.platformer.playerinput.inputs.InputActionListener;
+import ru.mipt.bit.platformer.playerinput.inputs.InputActions;
 
 import java.util.Map;
 
-public class KeyboardPlayerInput implements PlayerInput {
-    PlayerInputActions inputActions;
+public class KeyboardPlayerInput implements InputActionListener {
+    private final InputActions inputActions;
+    private final Level level;
 
-    public KeyboardPlayerInput(PlayerInputActions actions) {
+    public KeyboardPlayerInput(InputActions actions, Level level) {
         this.inputActions = actions;
+        this.level = level;
     }
 
-    public AbstractAction getAction() {
-        for (Map.Entry<Integer, AbstractAction> entry : inputActions.getKeyActions().entrySet()) {
+    public AbstractAction getAction(AbstractMovableLevelObject object) {
+        for (Map.Entry<Integer, AbstractActionFactory> entry : inputActions.getKeyActions().entrySet()) {
             if (Gdx.input.isKeyPressed(entry.getKey())) {
-                return entry.getValue();
+                return entry.getValue().create(level, object);
             }
         }
-        return new EmptyAction();
+        return new EmptyActionFactory().create(level, object);
     }
 }

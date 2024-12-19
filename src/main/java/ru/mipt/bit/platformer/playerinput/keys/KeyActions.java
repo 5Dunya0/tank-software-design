@@ -1,7 +1,6 @@
 package ru.mipt.bit.platformer.playerinput.keys;
 
 import ru.mipt.bit.platformer.playerinput.actions.MoveAction;
-import ru.mipt.bit.platformer.playerinput.actions.base.AbstractAction;
 
 import java.util.HashMap;
 import java.util.Map;
