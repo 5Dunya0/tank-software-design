@@ -1,27 +1,24 @@
-package ru.mipt.bit.platformer.playerinput.inputs;
+package ru.mipt.bit.platformer.playerinput.actions.factories;
 
-import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.entity.objects.Level;
+import ru.mipt.bit.platformer.entity.objects.base.GameObject;
+import ru.mipt.bit.platformer.entity.objects.base.Movable;
+import ru.mipt.bit.platformer.playerinput.actions.actions.MoveAction;
+import ru.mipt.bit.platformer.playerinput.actions.base.AbstractAction;
+import ru.mipt.bit.platformer.playerinput.actions.base.AbstractActionFactory;
+import ru.mipt.bit.platformer.playerinput.inputs.Direction;
 
-    public enum Direction {
-        RIGHT(0f, new GridPoint2(1, 0)),
-        LEFT(-180f, new GridPoint2(-1, 0)),
-        UP(90f, new GridPoint2(0, 1)),
-        DOWN(-90f, new GridPoint2(0, -1)),
-        ;
+public class MoveActionFactory implements AbstractActionFactory<GameObject> {
+    private final Direction direction;
+    private final Level level;
 
-        private final float directionRotation;
-        private final GridPoint2 directionPoint;
+    public MoveActionFactory(Direction direction, Level level) {
+        this.direction = direction;
+        this.level = level;
+    }
 
-            Direction(float directionRotation, GridPoint2 directionPoint) {
-                this.directionRotation = directionRotation;
-                this.directionPoint = directionPoint;
-            }
-
-            public float getDirectionRotation() {
-                return directionRotation;
-            }
-
-            public GridPoint2 getDirectionPoint() {
-                return directionPoint;
-            }
-        }
+    @Override
+    public AbstractAction create(GameObject object) {
+        return new MoveAction(direction, level, (Movable) object);
+    }
+}

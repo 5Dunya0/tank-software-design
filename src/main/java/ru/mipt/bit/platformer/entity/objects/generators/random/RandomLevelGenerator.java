@@ -3,9 +3,7 @@ package ru.mipt.bit.platformer.entity.objects.generators.random;
 import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.entity.objects.Level;
 import ru.mipt.bit.platformer.entity.objects.Tank;
-import ru.mipt.bit.platformer.entity.objects.Tree;
-import ru.mipt.bit.platformer.entity.objects.base.AbstractMovableLevelObject;
-import ru.mipt.bit.platformer.entity.objects.base.AbstractUnmovableLevelObject;
+import ru.mipt.bit.platformer.entity.objects.Obstacle;
 import ru.mipt.bit.platformer.entity.objects.generators.LevelGenerator;
 
 import java.util.*;
@@ -15,6 +13,9 @@ public class RandomLevelGenerator implements LevelGenerator {
     private final int height;
     private final int width;
     private final Set<GridPoint2> points = new HashSet<>();
+    private List<Obstacle> obstacles;
+    private List<Tank> tanks;
+    private Level level;
 
     public RandomLevelGenerator(int height, int width) {
         this.height = height;
@@ -22,13 +23,33 @@ public class RandomLevelGenerator implements LevelGenerator {
     }
 
     @Override
-    public Level generate() {
+    public void generate() {
         points.clear();
         Random random = new Random();
 
-        List<AbstractUnmovableLevelObject> unmovable = generateUnmovableObjects(5, random);
-        List<AbstractMovableLevelObject> movable = generateMovableObjects(3, random);
-        return new Level(movable, unmovable, height, width);
+        level = new Level(height, width);
+        generateObstacles(5, random);
+        generateTanks(3, random);
+    }
+
+    @Override
+    public Level getLevel() {
+        return level;
+    }
+
+    @Override
+    public Tank getPlayerTank() {
+        return tanks.get(0);
+    }
+
+    @Override
+    public List<Tank> getAITanks() {
+        return tanks.subList(1, tanks.size());
+    }
+
+    @Override
+    public List<Obstacle> getObstacles() {
+        return obstacles;
     }
 
     private GridPoint2 getRandomPoint(Random random) {
@@ -48,23 +69,25 @@ public class RandomLevelGenerator implements LevelGenerator {
         return point;
     }
 
-    public List<AbstractUnmovableLevelObject> generateUnmovableObjects(int countObjects, Random random) {
-        List<AbstractUnmovableLevelObject> unmovable = new ArrayList<>();
+    public void generateObstacles(int countObjects, Random random) {
+        obstacles = new ArrayList<>();
 
         for (int i = 0; i < countObjects; i++) {
             GridPoint2 point = getPoint(random);
-            unmovable.add(new Tree(point));
+            Obstacle object = new Obstacle(point);
+            obstacles.add(object);
+            level.addGameObject(object);
         }
-        return unmovable;
     }
 
-    public List<AbstractMovableLevelObject> generateMovableObjects(int countObjects, Random random) {
-        List<AbstractMovableLevelObject> movable = new ArrayList<>();
+    public void generateTanks(int countObjects, Random random) {
+        tanks = new ArrayList<>();
 
         for (int i = 0; i < countObjects; i++) {
             GridPoint2 point = getPoint(random);
-            movable.add(new Tank(point));
+            Tank tank = new Tank(point, 100);
+            tanks.add(tank);
+            level.addGameObject(tank);
         }
-        return movable;
     }
 }
