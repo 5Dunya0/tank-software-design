@@ -1,8 +1,14 @@
-package ru.mipt.bit.platformer.playerinput.actions.base;
+package ru.mipt.bit.platformer.playerinput.actions.factories;
 
-import ru.mipt.bit.platformer.entity.objects.Level;
-import ru.mipt.bit.platformer.entity.objects.base.AbstractMovableLevelObject;
+import ru.mipt.bit.platformer.entity.drawers.base.LevelGraphic;
+import ru.mipt.bit.platformer.entity.drawers.decorators.base.Toggle;
+import ru.mipt.bit.platformer.playerinput.actions.actions.ToggleAction;
+import ru.mipt.bit.platformer.playerinput.actions.base.AbstractAction;
+import ru.mipt.bit.platformer.playerinput.actions.base.AbstractActionFactory;
 
-public interface AbstractActionFactory {
-    AbstractAction create(Level level, AbstractMovableLevelObject object);
+public class ToggleActionFactory implements AbstractActionFactory<LevelGraphic> {
+    @Override
+    public AbstractAction create(LevelGraphic object) {
+        return new ToggleAction((Toggle) object);
+    }
 }
