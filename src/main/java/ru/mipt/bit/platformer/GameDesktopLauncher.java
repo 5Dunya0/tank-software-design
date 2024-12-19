@@ -8,8 +8,6 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 =======
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 
 import ru.mipt.bit.platformer.entity.level.Level;
 import ru.mipt.bit.platformer.entity.playerinput.PlayerInput;
@@ -17,11 +15,8 @@ import ru.mipt.bit.platformer.entity.playerinput.PlayerInput;
 
 import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.entity.objects.Level;
-import ru.mipt.bit.platformer.entity.drawers.LevelDrawer;
-import ru.mipt.bit.platformer.entity.objects.Tank;
-import ru.mipt.bit.platformer.entity.objects.Tree;
+import ru.mipt.bit.platformer.entity.draw.drawers.LevelDrawer;
 import ru.mipt.bit.platformer.entity.objects.base.AbstractMovableLevelObject;
-import ru.mipt.bit.platformer.entity.objects.base.AbstractUnmovableLevelObject;
 import ru.mipt.bit.platformer.playerinput.PlayerInput;
 import ru.mipt.bit.platformer.playerinput.PlayerInputHandler;
 
