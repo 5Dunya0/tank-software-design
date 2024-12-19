@@ -6,14 +6,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static ru.mipt.bit.platformer.util.GdxGameUtils.createBoundingRectangle;
 
+
     public class LevelObjectDrawer implements GraphicObject {
-        private String imagePath;
+        private final String imagePath;
         private Texture texture;
         private TextureRegion graphics;
         private Rectangle rectangle;
 
+
     public LevelObjectDrawer(String imagePath) {
                 this.imagePath = imagePath;
+
             }
 
             public void draw() {
